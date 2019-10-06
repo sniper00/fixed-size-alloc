@@ -1,4 +1,6 @@
 #pragma once
+#include <cstring>
+#include <cstdlib>
 
 template<size_t chunk_size, size_t count>
 class fixed_size_alloc
