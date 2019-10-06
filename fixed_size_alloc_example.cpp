@@ -21,6 +21,11 @@ int main()
             void* lbuf3 = la.alloc(32);
             void* lbuf4 = la.alloc(64);
             void* lbuf5 = la.alloc(64);
+            memcpy(lbuf1, &i, sizeof(i));
+            memcpy(lbuf2, &i, sizeof(i));
+            memcpy(lbuf3, &i, sizeof(i));
+            memcpy(lbuf4, &i, sizeof(i));
+            memcpy(lbuf5, &i, sizeof(i));
             la.free(lbuf1);
             la.free(lbuf2);
             la.free(lbuf3);
@@ -40,13 +45,18 @@ int main()
             void* lbuf3 = malloc(32);
             void* lbuf4 = malloc(32);
             void* lbuf5 = malloc(64);
+            memcpy(lbuf1, &i, sizeof(i));
+            memcpy(lbuf2, &i, sizeof(i));
+            memcpy(lbuf3, &i, sizeof(i));
+            memcpy(lbuf4, &i, sizeof(i));
+            memcpy(lbuf5, &i, sizeof(i));
             ::free(lbuf1);
             ::free(lbuf2);
             ::free(lbuf3);
             ::free(lbuf4);
             ::free(lbuf5);
         }
-        std::cout << "malloc cost" << microsecond() - start << "us" << std::endl;
+        std::cout << "malloc cost " << microsecond() - start << "us" << std::endl;
     }
     return 0;
 }
