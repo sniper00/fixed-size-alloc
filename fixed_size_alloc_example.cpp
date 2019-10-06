@@ -7,7 +7,7 @@ static int64_t microsecond()
     return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
 }
 
-void not_null(void* p)
+inline void not_null(void* p)
 {
     if(nullptr == p)
     {
@@ -53,7 +53,6 @@ int main()
         for (int i = 0; i < times; ++i)
         {
             void* buf1 = ::malloc(16);
-            
             void* buf2 = ::malloc(16);
             void* buf3 = ::malloc(32);
             void* buf4 = ::malloc(32);
