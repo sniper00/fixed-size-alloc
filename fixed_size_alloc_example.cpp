@@ -1,9 +1,12 @@
-# fixed-size-alloc
-fixed size alloc
+#include <chrono>
+#include <iostream>
+#include "fixed_size_alloc.hpp"
 
-# Example
+static int64_t microsecond()
+{
+    return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
+}
 
-```cpp
 int main()
 {
     int times = 10000000;
@@ -47,12 +50,3 @@ int main()
     }
     return 0;
 }
-```
-
-# Result
-```
-//Some cases 20 times faster than malloc
-fixed_size_alloc cost 115497us
-malloc cost 3371072us
-```
-
