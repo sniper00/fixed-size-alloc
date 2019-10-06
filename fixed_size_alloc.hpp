@@ -9,8 +9,6 @@ public:
     fixed_size_alloc()
     {
         begin_ = new char[capacity];
-        memset(begin_, 0, capacity);
-
         for (size_t i = 0; i < count; ++i)
         {
             record_[i] = i;
