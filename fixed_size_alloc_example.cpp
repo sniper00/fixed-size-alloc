@@ -11,26 +11,30 @@ int main()
 {
     int times = 10000000;
    {
-        fixed_size_alloc<64, 4192> la;
+        fixed_size_alloc<64, 4192> fsa;
         auto start = microsecond();
-
+        void* buf1 = nullptr;
+        void* buf2 = nullptr;
+        void* buf3 = nullptr;
+        void* buf4 = nullptr;
+        void* buf5 = nullptr;
         for (int i = 0; i < times; ++i)
         {
-            void* lbuf1 = la.alloc(16);
-            void* lbuf2 = la.alloc(16);
-            void* lbuf3 = la.alloc(32);
-            void* lbuf4 = la.alloc(64);
-            void* lbuf5 = la.alloc(64);
-            memcpy(lbuf1, &i, sizeof(i));
-            memcpy(lbuf2, &i, sizeof(i));
-            memcpy(lbuf3, &i, sizeof(i));
-            memcpy(lbuf4, &i, sizeof(i));
-            memcpy(lbuf5, &i, sizeof(i));
-            la.free(lbuf1);
-            la.free(lbuf2);
-            la.free(lbuf3);
-            la.free(lbuf4);
-            la.free(lbuf5);
+            buf1 = fsa.alloc(16);
+            buf2 = fsa.alloc(16);
+            buf3 = fsa.alloc(32);
+            buf4 = fsa.alloc(32);
+            buf5 = fsa.alloc(64);
+            memcpy(buf1, &i, sizeof(i));
+            memcpy(buf2, &i, sizeof(i));
+            memcpy(buf3, &i, sizeof(i));
+            memcpy(buf4, &i, sizeof(i));
+            memcpy(buf5, &i, sizeof(i));
+            la.free(buf1);
+            la.free(buf2);
+            la.free(buf3);
+            la.free(buf4);
+            la.free(buf5);
         }
 
         std::cout << "fixed_size_alloc cost " << microsecond() - start << "us" << std::endl;
@@ -38,23 +42,28 @@ int main()
 
     {
         auto start = microsecond();
+        void* buf1 = nullptr;
+        void* buf2 = nullptr;
+        void* buf3 = nullptr;
+        void* buf4 = nullptr;
+        void* buf5 = nullptr;
         for (int i = 0; i < times; ++i)
         {
-            void* lbuf1 = malloc(16);
-            void* lbuf2 = malloc(16);
-            void* lbuf3 = malloc(32);
-            void* lbuf4 = malloc(32);
-            void* lbuf5 = malloc(64);
-            memcpy(lbuf1, &i, sizeof(i));
-            memcpy(lbuf2, &i, sizeof(i));
-            memcpy(lbuf3, &i, sizeof(i));
-            memcpy(lbuf4, &i, sizeof(i));
-            memcpy(lbuf5, &i, sizeof(i));
-            ::free(lbuf1);
-            ::free(lbuf2);
-            ::free(lbuf3);
-            ::free(lbuf4);
-            ::free(lbuf5);
+            buf1 = ::malloc(16);
+            buf2 = ::malloc(16);
+            buf3 = ::malloc(32);
+            buf4 = ::malloc(32);
+            buf5 = ::malloc(64);
+            memcpy(buf1, &i, sizeof(i));
+            memcpy(buf2, &i, sizeof(i));
+            memcpy(buf3, &i, sizeof(i));
+            memcpy(buf4, &i, sizeof(i));
+            memcpy(buf5, &i, sizeof(i));
+            ::free(buf1);
+            ::free(buf2);
+            ::free(buf3);
+            ::free(buf4);
+            ::free(buf5);
         }
         std::cout << "malloc cost " << microsecond() - start << "us" << std::endl;
     }
